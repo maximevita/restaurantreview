@@ -1,6 +1,6 @@
 class Restaurant < ActiveRecord::Base
+  extend Enumerize
   has_many :reviews, dependent: :destroy
-  validates :name, presence: true
-  validates :address, presence: true
-  validates :category, inclusion: { in: %w(chinese italian japanese french belgian), message: "%{value} is not in our categories !" }
+  validates :name, :address, :category, presence: true
+  enumerize :category, in: [:chinese, :italian, :japanese, :french, :belgian]
 end
